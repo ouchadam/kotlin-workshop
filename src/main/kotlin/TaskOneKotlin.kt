@@ -6,7 +6,7 @@ class TaskOneKotlin {
      * Create a copy of the BankAccountJava with the new account name
      */
     fun updateAccountName(input: BankAccountKotlin, newName: String): BankAccountKotlin {
-        return input
+        return input.copy(name = newName)
     }
 
     /**
@@ -16,7 +16,7 @@ class TaskOneKotlin {
      *  The promotion is nullable.
      */
     fun updatePromotionEndTimestamp(input: BankAccountKotlin, newPromotionEndTimestamp: Long): BankAccountKotlin {
-        return input
+        return input.copy(promotion = input.promotion?.copy(endTimestamp = newPromotionEndTimestamp))
     }
 }
 

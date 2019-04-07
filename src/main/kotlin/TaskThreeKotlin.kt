@@ -6,7 +6,7 @@ class TaskThreeKotlin {
      * Create a copy of the PersonKotlin with the new age
      */
     fun updateAge(input: PersonKotlin, newAge: Int): PersonKotlin {
-        return input
+        return input.copy(age = newAge)
     }
 
     /**
@@ -16,7 +16,7 @@ class TaskThreeKotlin {
      * and update all children (and children's children etc)
      */
     fun updateFamilyName(input: PersonKotlin, newFamilyName: String): PersonKotlin {
-        return input
+        return input.updateFamilyName(newFamilyName)
     }
 
     /**
@@ -25,9 +25,22 @@ class TaskThreeKotlin {
      * Find the youngest PersonKotlin (taking into account the children's children)
      */
     fun findYoungestPerson(input: PersonKotlin): PersonKotlin {
-        return input
+        return input.findYoungest()
     }
 
+}
+
+private fun PersonKotlin.updateFamilyName(familyName: String): PersonKotlin {
+    return this.copy(lastName = familyName, children = this.children?.map {
+        it.updateFamilyName(familyName)
+    })
+}
+
+private fun PersonKotlin.findYoungest(): PersonKotlin {
+    return this.children?.foldRight(this.children.first()) { acc, person ->
+        val youngest = person.findYoungest()
+        return if (acc.age > youngest.age) youngest else acc
+    } ?: this
 }
 
 data class PersonKotlin(

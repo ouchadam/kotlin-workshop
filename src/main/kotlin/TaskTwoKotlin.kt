@@ -9,6 +9,13 @@ class TaskTwoKotlin {
      * For numbers which are multiples of both three and five print “FizzBuzz“.
      */
     fun fizzBuzz(): List<String> {
-        return emptyList()
+        return (1..100).toList().map { it.toFizBuzz() }
+    }
+
+    private fun Int.toFizBuzz() = when {
+        this % 3 == 0 && this % 5 == 0 -> "FizzBuzz"
+        this % 3 == 0 -> "Fizz"
+        this % 5 == 0 -> "Buzz"
+        else -> this.toString()
     }
 }

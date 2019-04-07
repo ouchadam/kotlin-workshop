@@ -11,6 +11,22 @@ public class TaskTwoJava {
      * For numbers which are multiples of both three and five print “FizzBuzz“.
      */
     public List<String> fizzBuzz() {
-       return new ArrayList<>();
+        List<String> result = new ArrayList<>();
+        for (int i = 0; i < 100; i++) {
+            result.add(toValue(i + 1));
+        }
+        return result;
+    }
+
+    private String toValue(int input) {
+        if (input %  3 == 0 && input % 5 == 0) {
+            return "FizzBuzz";
+        } else if (input % 3 == 0) {
+            return "Fizz";
+        } else if (input % 5 == 0) {
+            return "Buzz";
+        } else {
+            return String.valueOf(input);
+        }
     }
 }
