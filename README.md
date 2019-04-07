@@ -6,4 +6,4 @@ https://ouchadam.github.io/kotlin-workshop/#1
 
 ## Aim
 
-To make all the tests pass without modifying them, example answers can be found be found [here if needed](https://github.com/ouchadam/kotlin-workshop/tree/answers)
+To make all the tests pass without modifying them, example answers can be found [here if needed](https://github.com/ouchadam/kotlin-workshop/tree/answers)
