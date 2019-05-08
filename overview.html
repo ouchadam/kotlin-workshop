@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Title</title>
+    <meta charset="utf-8">
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+        @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+        @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+        body {
+            font-family: 'Droid Serif';
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Yanone Kaffeesatz';
+            font-weight: normal;
+        }
+
+        .remark-code,
+        .remark-inline-code {
+            font-family: 'Ubuntu Mono';
+        }
+
+        /* theme class for slide pages */
+        .inverse {
+            background: hsl(0, 0%, 15%);
+            color: hsl(0, 5%, 75%);
+        }
+
+        .inverse h1 {
+            text-align: left;
+            color: hsl(0, 5%, 95%);
+            line-height: 0.8em;
+            font-size: 3em;
+
+        }
+
+        .inverse h2 {
+            color: hsl(0, 5%, 90%);
+            line-height: 0.8em;
+        }
+
+        .inverse a {
+            color: hsl(330, 75%, 50%);
+            text-decoration: none;
+        }
+
+        .superBigText h1 {
+            text-align: center;
+            font-size: 6.5em;
+        }
+
+        .inverse code {
+            color: hsl(330, 75%, 100%);
+            font-size: 1.5em;
+        }
+
+        /* custom styles for inline span notation */
+        span.red {
+            color: hsl(0, 90%, 50%);
+        }
+
+        /* print filling whole paper */
+        @media print {
+            .remark-slide-scaler {
+                left: 5vw !important;
+                width: 90vw !important;
+                top: 5vh !important;
+                height: 90vh !important;
+                transform: scale(1) !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <textarea id="source">
+
+class: left, inverse
+layout: true
+---
+
+class: middle
+
+# Kotlin overview
+
+---
+
+# Minimal
+
+--
+<br>
+```kotlin
+val input = "Hello world"
+println(input)
+```
+
+--
+<br>
+```kotlin
+fun add(a: Int, b: Int) = a + b
+``` 
+
+--
+<br>
+```kotlin
+(0..100).joinToString { "$it Mississippi" }
+```
+
+---
+
+# Typable
+<br>
+```kotlin
+val myValue: String = "Kotlin"
+```
+
+--
+
+```kotlin
+fun double(input: Int) : Long { 
+    return input * 2
+ }
+```
+
+--
+
+```kotlin
+val list: List<String> = listOf(myValue)
+```
+
+--
+
+```kotlin
+val list = listOf(myValue)
+```
+
+---
+
+# Explicable
+
+<br>
+```kotlin
+var mutableName = "Workshop"
+```
+--
+```kotlin
+val immutableName = "Workshop"
+```
+--
+```kotlin
+// throws UninitializedPropertyAccessException 
+lateinit var uninitialisedName: String 
+```
+---
+
+# Nullable
+
+<br/>
+
+```kotlin
+val name: String? = null
+```
+
+--
+
+```kotlin
+val isEmpty = if (name == null) true else name.isEmpty()
+```
+
+--
+
+```kotlin
+val isEmpty = name?.isEmpty() ?: true
+```
+
+---
+
+# Immutable
+
+```kotlin
+fun print(input: String) {
+    input = "override" // does not compile
+    println(input)
+}
+```
+
+--
+
+```kotlin
+val list: List<Int> = listOf(1, 2, 3)
+list.add(4) // does not exist
+```
+
+--
+
+```kotlin
+val newList = listOf(1, 2, 3) + 4
+```
+
+--
+
+```kotlin
+val updated = Person("a", 100).copy(age = 101)
+```
+
+---
+
+# Functional
+--
+ _ish~_
+--
+
+```kotlin
+val add = { a: Int -> { b: Int -> a + b } }
+println(add(1)(1))
+```
+
+--
+
+```kotlin
+fun printFunc(input: String) { println(input) }
+val printer: (String) -> Unit = ::printFunc
+printer("hello")
+```
+
+--
+
+
+```kotlin
+list.map { }
+list.filter { }
+list.reduce { }
+```
+---
+
+# Model_able_
+
+```kotlin
+data class Person(val name: String, val age: Int)
+```
+--
+
+```kotlin
+val instance1 = Person("a", 100)
+val instance2 = Person("a", 100)
+
+instance1 == instance2 // true
+instance1 === instance2 // false
+```
+
+--
+
+```kotlin
+val updated = Person("a", 100).copy(age = 101)
+```
+
+---
+
+# Contractual 
+
+```kotlin
+val name : String? = null
+if (name == null) {
+    return
+}
+name.length // treated as non null 
+```
+
+--
+
+```kotlin
+when(exception) {
+    is HttpException -> "Error ${exception.statusCode}"
+    is OfflineException -> "You're offline!"
+}
+```
+---
+
+# Extendable
+
+--
+
+```kotlin
+open class Printer<T> {}
+class DogPrinter : Printer<Dog> {
+    override fun print(dog: Dog) {}
+}
+```
+
+--
+```kotlin
+fun Printer.print(dog: Dog) {}
+```
+    </textarea>
+
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+    <script
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS_HTML&delayStartupUntil=configured"
+        type="text/javascript"></script>
+    <script>
+        var slideshow = remark.create(
+            {
+                ratio: "16:9",
+                countIncrementalSlides: false,
+                slideNumberFormat: '',
+                navigation: {
+                    scroll: false
+                },
+                highlightStyle: 'ocean'
+            }
+        );
+        MathJax.Hub.Config({
+            tex2jax: {
+                skipTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        });
+
+        MathJax.Hub.Configured();
+    </script>
+</body>
+
+</html>
